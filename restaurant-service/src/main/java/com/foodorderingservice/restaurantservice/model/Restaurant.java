@@ -23,6 +23,7 @@ public class Restaurant {
     private String fssaiNumber;
     private String gstNumber;
     private String pincode;
+    private String parrot;
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<MenuItems> menuItems;
