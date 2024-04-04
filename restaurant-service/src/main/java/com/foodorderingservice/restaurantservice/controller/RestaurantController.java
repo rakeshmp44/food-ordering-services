@@ -24,7 +24,7 @@ public class RestaurantController {
     }
     @PostMapping("/{restaurantId}/addmenu")
     @ResponseStatus(HttpStatus.CREATED)
-    public Restaurant addMenuItems(@PathVariable Long restaurantId,@RequestBody MenuItemsRequest menuItemsRequest){
+    public MenuItems addMenuItems(@PathVariable Long restaurantId,@RequestBody MenuItemsRequest menuItemsRequest){
         return restaurantService.addMenuItems(restaurantId,menuItemsRequest);
     }
 }

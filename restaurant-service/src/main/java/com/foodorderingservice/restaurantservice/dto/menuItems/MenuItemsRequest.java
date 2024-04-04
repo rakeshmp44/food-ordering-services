@@ -10,8 +10,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MenuItemsRequest extends MenuItems {
+@Builder
+public class MenuItemsRequest{
     private String foodName;
     private BigDecimal foodPrice;
 
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private Restaurant restaurant;
 }

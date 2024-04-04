@@ -36,14 +36,25 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    public Restaurant addMenuItems(Long restaurantId, MenuItemsRequest menuItemsRequest){
-        Restaurant restaurant = restaurantRepository.findByRestaurantId(restaurantId);
-        if(restaurantId != null){
-            menuItemsRequest.setRestaurant(restaurant);
-            restaurant.getMenuItems().add(menuItemsRequest);
-            menuItemRepository.save(menuItemsRequest);
-        }
-        log.info("menu item added succeefully");
-        return restaurantRepository.save(restaurant);
+    public MenuItems addMenuItems(Long restaurantId, MenuItemsRequest menuItemsRequest){
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
+        MenuItems newMenuItems = MenuItems.builder()
+                .foodName(menuItemsRequest.getFoodName())
+                .foodPrice(menuItemsRequest.getFoodPrice())
+                .build();
+
+        newMenuItems.setRestaurant(restaurant);
+        log.info("menu item {} added succeefully",newMenuItems.getFoodName());
+        return menuItemRepository.save(newMenuItems);
+
+//        if(restaurantId != null){
+//            menuItemsRequest.setRestaurant(restaurant);
+//            MenuItems menuItems = MenuItems.builder()
+//                    .foodName(menuItemsRequest.getFoodName())
+//                    .foodPrice(menuItemsRequest.getFoodPrice()).build();
+//
+//            menuItemRepository.save(menuItems);
+//        }
+//
     }
 }
