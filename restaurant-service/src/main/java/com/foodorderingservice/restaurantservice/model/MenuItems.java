@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Entity
 @AllArgsConstructor
@@ -20,4 +21,5 @@ public class MenuItems {
     @ManyToOne
     @JoinColumn(name = "restaurant_id", nullable = true)
     private Restaurant restaurant;
+
 }

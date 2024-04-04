@@ -2,7 +2,6 @@ package com.foodorderingservice.restaurantservice.controller;
 
 import com.foodorderingservice.restaurantservice.dto.menuItems.MenuItemsRequest;
 import com.foodorderingservice.restaurantservice.dto.restaurant.RestaurantRequest;
-import com.foodorderingservice.restaurantservice.model.MenuItems;
 import com.foodorderingservice.restaurantservice.model.Restaurant;
 import com.foodorderingservice.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +21,18 @@ public class RestaurantController {
     public Restaurant createRestaurant(@RequestBody RestaurantRequest restaurantRequest){
         return restaurantService.createRestaurant(restaurantRequest);
     }
-    @PostMapping("/{restaurantId}/addmenu")
+    @GetMapping("/{restaurantId}/getRestaurant")
+    @ResponseStatus(HttpStatus.FOUND)
+    public Restaurant getRestaurant(@PathVariable Long restaurantId){
+        return restaurantService.getRestaurant(restaurantId);
+    }
+    @GetMapping("/getAllRestaurants")
+    public List<Restaurant> getAllRestaurant(){
+        return restaurantService.getAllRestaurants();
+    }
+    @PostMapping("/{restaurantId}/addMenu")
     @ResponseStatus(HttpStatus.CREATED)
-    public MenuItems addMenuItems(@PathVariable Long restaurantId,@RequestBody MenuItemsRequest menuItemsRequest){
+    public boolean addMenuItems(@PathVariable Long restaurantId, @RequestBody MenuItemsRequest menuItemsRequest){
         return restaurantService.addMenuItems(restaurantId,menuItemsRequest);
     }
 }
